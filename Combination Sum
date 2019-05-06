@@ -1,0 +1,30 @@
+class Solution {
+    static int arr[] = new int[10000];
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        printCompositions(candidates,target,0);
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        return list;
+    }
+    static void printCompositions(int candidates[], int n, int i) 
+    { 
+        int MAX_POINT = candidates.length; 
+        if (n == 0) 
+        { 
+            printArray(arr, i); 
+        } 
+        else if(n > 0) 
+        { 
+            for (int k = i; k < MAX_POINT; k++) 
+            { 
+                arr[i] = candidates[k]; 
+                printCompositions(candidates, n-candidates[k], i+1); 
+            } 
+        } 
+    } 
+    static void printArray(int arr[], int m) 
+    { 
+        for (int i = 0; i < m; i++) 
+            System.out.print(arr[i] + " "); 
+        System.out.println(); 
+    }
+}
