@@ -1,0 +1,38 @@
+import java.util.*;
+class Solution {
+    class point{
+        int start;
+        int end;
+        point(int st,int end){
+            this.start = st;
+            this.end = end;
+        }
+    }
+    public int[][] merge(int[][] intervals) {
+        Stack<point> stk = new Stack<point>();
+        point pt = new point(intervals[0][0],intervals[0][1]);
+        stk.push(pt);
+        for(int i = 1; i < intervals.length; i++){
+            point p = stk.peek();
+            if(intervals[i][0] <= p.end){
+                p = stk.pop();
+                p.end = intervals[i][1];
+                stk.push(p);
+            }else{
+                point p1 = new point(intervals[i][0],intervals[i][1]);
+                stk.push(p1);
+            }
+        }
+        printStack(stk);
+        return intervals;
+    }
+    public static void printStack(Stack<point> stk){
+        if(stk.empty()){
+            return;
+        }
+        point p = stk.pop();
+        printStack(stk);
+        System.out.print(p.start+", "+p.end);
+        System.out.println();
+    }
+}
